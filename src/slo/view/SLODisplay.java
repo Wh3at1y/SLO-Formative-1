@@ -11,10 +11,17 @@ public class SLODisplay {
 		return answer;
 	}
 	
-	public String getUserInputNumber(int print)
+	public String getUserInputNumber(int number)
 	{
 		String answer;
-			answer = JOptionPane.showInputDialog(print);
+			answer = JOptionPane.showInputDialog(number);
+		return answer;
+	}
+	
+	public String getUserInputDouble(double number)
+	{
+		String answer;
+			answer = JOptionPane.showInputDialog(number);
 		return answer;
 	}
 	
@@ -37,9 +44,16 @@ public class SLODisplay {
 		return answer;
 	}
 	
+	public int noOption()
+	{
+		int answer;
+			answer = JOptionPane.CANCEL_OPTION;
+		return answer;
+	}
+	
 	public boolean isInteger(String print)
 	{
-		boolean isInt = true;
+		boolean isInt = false;
 			
 			try
 			{
@@ -48,8 +62,25 @@ public class SLODisplay {
 			}
 			catch(NumberFormatException error)
 			{
-				showSomething("Please enter the correct number, and not a string.");
+					showSomething("Exiting!");
+					System.exit(0);
 			}
 		return isInt;
+	}
+	
+	public boolean isDouble(String print)
+	{
+		boolean isDouble = false;
+		
+			try
+			{
+				double validDoub = Double.parseDouble(print);
+				isDouble = true;
+			}
+			catch(NumberFormatException error)
+			{
+				showSomething("No... no, try again... *rolls eyes*");
+			}
+			return isDouble;
 	}
 }

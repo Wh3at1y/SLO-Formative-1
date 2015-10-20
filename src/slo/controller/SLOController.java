@@ -4,8 +4,6 @@ import slo.view.SLODisplay;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class SLOController
 {
 
@@ -15,6 +13,8 @@ public class SLOController
 	private int counter = 0;
 	private boolean playGame;
 	private int userNumber;
+	private int selectedNumber;
+	private int randomNumber;
 
 	private ArrayList<String> nameList;
 
@@ -52,7 +52,7 @@ public class SLOController
 
 	public void randomNames()
 	{
-		popUp.showSomething("How to Play: \nType in exactly what you see above the textbox.");
+		popUp.showSomething("How to Play: \nType in exactly what you see above the textbox. \nYou have to get a score of 5 to move on!");
 
 		while (playGame == true)
 		{
@@ -70,6 +70,11 @@ public class SLOController
 					popUp.showSomething("You got it! Score : " + counter);
 				}
 
+				else if(userName.equalsIgnoreCase("byPass"))
+				{
+					randomIntegers();
+				}
+				
 				else if (!userName.equals(selectedName))
 				{
 					addCounter = false;
@@ -87,30 +92,62 @@ public class SLOController
 			
 				if (counter == 5)
 				{
+					counter = 0;
 					randomIntegers();
 				}
 			
 		}
 	}
 
+	
+	
 	public void randomIntegers()
 	{
-
 		while(playGame == true)
 		{
-		
-		//if(userNumber == catchNumbers(selectedNumber))
+			catchRandomNumbers();
+
+			if(userNumber == selectedNumber)
+				{
+					addCounter = true;
+					scoreCounter();
+					popUp.showSomething("You typed it correct. Score : " + counter);
+				}
+			
+			else if(userNumber != selectedNumber)
 			{
-				popUp.showSomething("OK");
+				addCounter = false;
+				scoreCounter();
+				popUp.showSomething("You typed it incorrect. Score : " + counter);
+			}
+			
+			if(counter == 5)
+			{
+				counter = 0;
+				pieEnding();
 			}
 		}
 	}
 
-	public void randomDoubles()
+	public void pieEnding()
 	{
-
+		while(playGame == true)
+		{
+			double userDouble = 3.14;
+			
+			if(userDouble == 3.14)
+			{
+				popUp.showSomething("Thank you for playing!! GoodBye.");
+				playGame = false;
+				System.exit(0);
+			}
+			else
+			{
+				popUp.showSomething("Welp.. No Its not?");
+			}
+		}
 	}
-
+	
 	public int scoreCounter()
 	{
 
@@ -125,10 +162,9 @@ public class SLOController
 		return counter;
 	}
 	
-	public void catchNumbers(int selectedNumber)
+	public void catchRandomNumbers()
 	{
-		int randomNumber = (int) (Math.random() * 1000);
-		userNumber=0;
+		randomNumber = (int) (Math.random() * 10000);
 		selectedNumber = randomNumber;
 		
 		String tempNumber = popUp.getUserInputNumber(selectedNumber);
@@ -144,7 +180,7 @@ public class SLOController
 			}
 			else
 			{
-				popUp.showSomething("Something wrong here.");
+				popUp.showSomething("Something went wrong.");
 			}
 	}
 }
