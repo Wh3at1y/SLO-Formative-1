@@ -57,7 +57,6 @@ public class SLODisplay {
 			
 			try
 			{
-				int validInt = Integer.parseInt(print);
 				isInt = true;
 			}
 			catch(NumberFormatException error)
@@ -74,7 +73,6 @@ public class SLODisplay {
 		
 			try
 			{
-				double validDoub = Double.parseDouble(print);
 				isDouble = true;
 			}
 			catch(NumberFormatException error)
